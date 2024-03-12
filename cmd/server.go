@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/Jose-N/go-htmx-todo/handler"
+	"github.com/Jose-N/go-htmx-todo/internal/handler"
 	"github.com/labstack/echo/v4"
 )
 
