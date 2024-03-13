@@ -1,20 +1,18 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/Jose-N/go-htmx-todo/internal/handler"
+	"github.com/Jose-N/go-htmx-todo/internal/templates"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
 	e := echo.New()
-
 	h := &handler.Handler{}
 
 	// Index
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello World with AIR")
+		return templates.Index("World").Render(c.Request().Context(), c.Response().Writer)
 	})
 
 	//user routes
