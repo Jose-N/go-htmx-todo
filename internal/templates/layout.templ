@@ -1,0 +1,22 @@
+package templates
+
+templ header(title string) {
+    <head>
+        <title>{ title }</title>
+        <meta charset="UTF-8" />
+    </head>
+}
+
+templ footer() {
+    <footer> This is a footer </footer>
+}
+
+templ Layout(contents templ.Component, title string) {
+    @header(title)
+    <body>
+        <main>
+            @contents
+        </main>
+    </body>
+    @footer()
+}

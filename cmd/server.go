@@ -12,7 +12,8 @@ func main() {
 
 	// Index
 	e.GET("/", func(c echo.Context) error {
-		return templates.Index("World").Render(c.Request().Context(), c.Response().Writer)
+		content := templates.Index("World")
+		return templates.Layout(content, "Index").Render(c.Request().Context(), c.Response().Writer)
 	})
 
 	//user routes
