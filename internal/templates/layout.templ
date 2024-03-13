@@ -7,6 +7,14 @@ templ header(title string) {
     </head>
 }
 
+templ navbar() {
+    <nav>
+        <a>Home</a>
+        <a>About</a>
+        <a>Login</a>
+    </nav>
+}
+
 templ footer() {
     <footer> This is a footer </footer>
 }
@@ -14,6 +22,7 @@ templ footer() {
 templ Layout(contents templ.Component, title string) {
     @header(title)
     <body>
+        @navbar()
         <main>
             @contents
         </main>
