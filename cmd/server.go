@@ -14,8 +14,9 @@ func main() {
 
 	// Index
 	e.GET("/", func(c echo.Context) error {
-		content := templates.Index("World")
-		return templates.Layout(content, "Index").Render(c.Request().Context(), c.Response().Writer)
+		content := templates.Index()
+		title := "Esojist | A Jank Todo App"
+		return templates.Layout(content, title).Render(c.Request().Context(), c.Response().Writer)
 	})
 
 	//user routes

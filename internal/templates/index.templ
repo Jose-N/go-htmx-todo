@@ -1,7 +1,29 @@
 package templates
 
-templ Index(word string) {
-    <div>
-        Hello {word}!!!
-    </div>
+templ hero() {
+    <section id="hero">
+        <div class="container flex flex-col-reverse md:flex-row items-center 
+        px-6 mx-auto mt-10 space-y-0 md:space-y-0">
+            <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
+                <h1 class="max-w-md text-4xl font-bold text-center md:text-5xl 
+                md:text-left">
+                    Clear Brain Clutter, Get Things Done
+                </h1>
+                <p class="max-w-sm text-center text-darkGrayBlue md:text-left">
+                    Introducing Esojist: Your Ultimate Productivity Companion! 
+                    Say goodbye to forgotten tasks and hello to seamless organization with Esojist, 
+                    the intuitive todo application designed to streamline your workflow. 
+                    With customizable lists, priority settings, and smart reminders, 
+                    Esojist empowers you to conquer your daily agenda effortlessly. 
+                    Whether you're managing work projects, personal goals, or household chores, 
+                    Esojist is your go-to solution for staying on top of your tasks anytime, anywhere.
+                </p>
+            </div>
+            <div></div>
+        </div>
+    </section>
+}
+
+templ Index() {
+    @hero()
 }
