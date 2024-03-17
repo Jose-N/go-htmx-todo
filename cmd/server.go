@@ -10,6 +10,8 @@ func main() {
 	e := echo.New()
 	h := &handler.Handler{}
 
+	e.Static("/static", "internal/static")
+
 	// Index
 	e.GET("/", func(c echo.Context) error {
 		content := templates.Index("World")

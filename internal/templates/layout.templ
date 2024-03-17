@@ -4,14 +4,28 @@ templ header(title string) {
     <head>
         <title>{ title }</title>
         <meta charset="UTF-8" />
+        <link rel="stylesheet" href="static/css/style.css" />
     </head>
 }
 
 templ navbar() {
-    <nav>
-        <a>Home</a>
-        <a>About</a>
-        <a>Login</a>
+    <nav class="relative container mx-auto p-6">
+        <div class="flex item-center justify-between">
+            <div class="pt-2">
+                <img src="static/image/logo" alt="Company Logo"/>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-darkGrayBlue">Pricing</a>
+                <a href="#" class="hover:text-darkGrayBlue">Features</a>
+                <a href="#" class="hover:text-darkGrayBlue">About Us</a>
+                <a href="#" class="hover:text-darkGrayBlue">Contact</a>
+            </div>
+            <a 
+            href="#"
+            class="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full 
+            baseline hover:bg-brightRedLight"
+            >Get Started</a>
+        </div>
     </nav>
 }
 
