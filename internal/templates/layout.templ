@@ -20,11 +20,17 @@ templ navbar() {
                 <a href="#" class="hover:text-darkGrayBlue">About Us</a>
                 <a href="#" class="hover:text-darkGrayBlue">Contact</a>
             </div>
-            <a 
-            href="#"
-            class="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full 
-            baseline hover:bg-brightRedLight"
-            >Start For Free</a>
+
+            <div class="hidden md:flex flex-row">
+                <a href="#" class="hidden md:block p-3 pt-2 hover:text-darkGrayBlue 
+                border-r-2 border-gray-600 border-solid"
+                >Log In</a>
+                <a 
+                href="#"
+                class="hidden md:block p-3 px-6 pt-2 ml-2 text-white bg-brightRed rounded-full 
+                baseline hover:bg-brightRedLight"
+                >Start For Free</a>
+            </div>
 
             <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
                 <span class="hamburger-top"></span>
