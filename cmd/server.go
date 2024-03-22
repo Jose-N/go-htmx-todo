@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Jose-N/go-htmx-todo/internal/handler"
+	pgstore "github.com/Jose-N/go-htmx-todo/internal/store/pgStore"
 	"github.com/Jose-N/go-htmx-todo/internal/templates"
 	"github.com/labstack/echo/v4"
 )
@@ -9,6 +10,8 @@ import (
 func main() {
 	e := echo.New()
 	h := &handler.Handler{}
+	db := pgstore.ConnectDB()
+	_ = db
 
 	e.Static("/static", "internal/static")
 
