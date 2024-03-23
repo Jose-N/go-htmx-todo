@@ -626,6 +626,10 @@ video {
   margin-top: 8rem;
 }
 
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -652,6 +656,10 @@ video {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .max-w-6xl {
