@@ -112,7 +112,7 @@ templ footer() {
     </footer>
 }
 
-templ Layout(contents templ.Component, title string) {
+templ MainLayout(contents templ.Component, title string) {
     @header(title)
     <body>
         @navbar()
@@ -121,4 +121,13 @@ templ Layout(contents templ.Component, title string) {
         </main>
     </body>
     @footer()
+}
+
+templ AuthLayout(contents templ.Component, title string) {
+    @header(title)
+    <body>
+        <main>
+            @contents
+        </main>
+    </body>
 }

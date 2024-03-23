@@ -27,8 +27,11 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		content := templates.Index()
 		title := "Esojist | A Jank Todo App"
-		return templates.Layout(content, title).Render(c.Request().Context(), c.Response().Writer)
+		return templates.MainLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
 	})
+
+	//auth routes
+	e.GET("/signup", h.SignUp)
 
 	//user routes
 	e.POST("/users", h.SaveUser)
