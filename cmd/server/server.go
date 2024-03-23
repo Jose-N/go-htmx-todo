@@ -1,16 +1,24 @@
 package main
 
 import (
+	"log"
+
 	"github.com/Jose-N/go-htmx-todo/internal/handler"
-	pgstore "github.com/Jose-N/go-htmx-todo/internal/store/pgStore"
+	"github.com/Jose-N/go-htmx-todo/internal/store/pgStore"
 	"github.com/Jose-N/go-htmx-todo/internal/templates"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Failed to load .env file")
+	}
+
 	e := echo.New()
 	h := &handler.Handler{}
-	db := pgstore.ConnectDB()
+	db := pgStore.ConnectDB()
 	_ = db
 
 	e.Static("/static", "internal/static")
