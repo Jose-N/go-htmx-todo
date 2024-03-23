@@ -11,7 +11,7 @@ func main() {
 	fakeUser := model.User{
 		FirstName: "Jose",
 		LastName:  "Naylor",
-		Email:     "fake@email.com",
+		Email:     "fake2@email.com",
 		Password:  "pass123",
 	}
 

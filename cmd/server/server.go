@@ -16,6 +16,8 @@ func main() {
 		log.Fatal("Failed to load .env file")
 	}
 
+	title := "Esojist | A Jank Todo App"
+
 	e := echo.New()
 	h := &handler.Handler{}
 	db := pgStore.ConnectDB()
@@ -26,15 +28,14 @@ func main() {
 	// Index
 	e.GET("/", func(c echo.Context) error {
 		content := templates.Index()
-		title := "Esojist | A Jank Todo App"
 		return templates.MainLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
 	})
 
 	//auth routes
 	e.GET("/signup", h.SignUp)
+	e.POST("/signup", h.SaveUser)
 
 	//user routes
-	e.POST("/users", h.SaveUser)
 	e.GET("/user/:id", h.GetUser)
 	e.PATCH("/user/:id", h.UpdateUser)
 	e.DELETE("user/:id", h.DeleteUser)
