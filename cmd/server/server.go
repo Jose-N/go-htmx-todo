@@ -18,10 +18,12 @@ func main() {
 
 	title := "Esojist | A Jank Todo App"
 
-	e := echo.New()
-	h := &handler.Handler{}
 	db := pgStore.ConnectDB()
-	_ = db
+	h := &handler.Handler{
+		Db: db,
+	}
+
+	e := echo.New()
 
 	e.Static("/static", "internal/static")
 
