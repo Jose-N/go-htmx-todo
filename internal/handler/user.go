@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"golang.org/x/crypto/bcrypt"
+
 	"fmt"
 	"net/http"
 	"strconv"
@@ -10,16 +12,21 @@ import (
 )
 
 func (h *Handler) SaveUser(c echo.Context) error {
+	userStore := pgStore.UserStore{
+		Db: h.Db,
+	}
+
 	firstName := c.FormValue("first-name")
 	lastName := c.FormValue("last-name")
 	email := c.FormValue("email")
 	password := c.FormValue("password")
 
-	userStore := pgStore.UserStore{
-		Db: h.Db,
+	pass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 
-	id, err := userStore.CreateUser(firstName, lastName, email, password)
+	id, err := userStore.CreateUser(firstName, lastName, email, string(pass))
 	if err != nil {
 		return err
 	}
