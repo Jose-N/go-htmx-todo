@@ -15,13 +15,13 @@ import (
 func (h *Handler) SignUp(c echo.Context) error {
 	content := templates.Auth(true, "/signup", "Sign Up")
 	title := "Esojist | A Jank Todo App"
-	return templates.AuthLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
+	return templates.GenericLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
 }
 
 func (h *Handler) SignIn(c echo.Context) error {
 	content := templates.Auth(false, "/signin", "Sign In")
 	title := "Esojist | A Jank Todo App"
-	return templates.AuthLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
+	return templates.GenericLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
 }
 
 func (h *Handler) LogIn(c echo.Context) error {
@@ -40,14 +40,13 @@ func (h *Handler) LogIn(c echo.Context) error {
 		}
 	}
 
-	expiresAt := time.Now().Add(time.Minute * 10)
-	token := jwt.New(jwt.SigningMethodHS256)
-
-	claims := token.Claims.(jwt.MapClaims)
-	claims["exp"] = expiresAt
-	claims["authorized"] = true
-	claims["email"] = user.Email
-	claims["userId"] = user.ID
+	expiresAt := time.Now().Add(time.Minute * 15)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"exp":        expiresAt,
+		"authorized": true,
+		"email":      user.Email,
+		"userId":     user.ID,
+	})
 
 	tokenString, err := token.SignedString([]byte("secret"))
 	if err != nil {

@@ -45,8 +45,8 @@ func main() {
 	e.DELETE("user/:id", h.DeleteUser)
 
 	//todo routes
-	e.POST("todos", h.SaveTodo)
-	e.GET("/todos", h.GetTodos)
+	e.POST("todo", h.SaveTodo)
+	e.GET("/todo", h.GetTodos)
 	e.GET("/todo/:id", h.GetTodo)
 	e.PATCH("/todo/:id", h.UpdateTodo)
 	e.DELETE("/todo/:id", h.DeleteTodo)
