@@ -1,0 +1,56 @@
+package templates
+
+templ Auth(isSignUp bool, action string, btnText string) {
+    <section id="signup" class="flex justify-center flex-col">
+        <div class="relative mx-auto p-6">
+            <img src="static/image/logo.png" alt="Company Logo" class="item-center ml-6 h-6"/>
+        </div>
+
+        <div class="flex flex-row mx-auto mt-6">
+            <div class="flex flex-col w-1/2 justify-center items-center">
+                <h1 class="text-5xl text-bold max-w-md justify-left py-3">
+                    if isSignUp {
+                        Sign Up
+                    } else {
+                        Sign In
+                    }
+                </h1>
+                <div class="w-1/2">
+                    <form action={ templ.URL(action) } method="post" class="flex flex-col mt-3">
+                        if isSignUp {
+                            <label for="first-name" class="text-sm">First Name:</label>
+                            <input type="text" name="first-name" id="first-name" 
+                            class="border-2 border-solid border-grey-300 rounded-lg"/>
+
+                            <label for="last-name" class="text-sm">Last Name:</label>
+                            <input type="text" name="last-name" id="last-name"
+                            class="border-2 border-solid border-grey-300 rounded-lg"/>
+                        }
+
+                        <label for="email" class="text-sm">Email:</label>
+                        <input type="email" name="email" id="email"
+                        class="border-2 border-solid border-grey-300 rounded-lg"/>
+
+                        <label for="password" class="text-sm">Password</label>
+                        <input type="password" name="password" id="password"
+                        class="border-2 border-solid border-grey-300 rounded-lg"/>
+
+                        <input type="submit" value={ btnText }
+                        class="bg-brightRed text-white rounded-lg py-3 mt-3"/>
+                    </form>
+
+                    <p class="text-sm text-darkGrayBlue">
+                        if isSignUp {
+                            Already signed up? <a href="/signin"> Go to sign in.</a>
+                        } else {
+                            Need an account? <a href="/signup"> Sign Up!</a>
+                        }
+                    </p>
+                </div>
+            </div>
+            <div class="flex w-1/2">
+                <img src="static/image/flower.png" alt="" class="rounded-full"/>
+            </div>
+        </div>
+    </section>
+}

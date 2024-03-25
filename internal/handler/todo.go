@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/Jose-N/go-htmx-todo/internal/templates"
 	"github.com/labstack/echo/v4"
 )
 
@@ -13,8 +14,8 @@ func (h *Handler) SaveTodo(c echo.Context) error {
 }
 
 func (h *Handler) GetTodos(c echo.Context) error {
-	todos := "This is a list of Todos"
-	return c.String(http.StatusOK, todos)
+	content := templates.Main("jose", "123")
+	return templates.GenericLayout(content, "title").Render(c.Request().Context(), c.Response().Writer)
 }
 
 func (h *Handler) GetTodo(c echo.Context) error {
