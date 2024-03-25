@@ -36,6 +36,8 @@ func main() {
 	//auth routes
 	e.GET("/signup", h.SignUp)
 	e.POST("/signup", h.SaveUser)
+	e.GET("/signin", h.SignIn)
+	e.POST("/signin", h.LogIn)
 
 	//user routes
 	e.GET("/user/:id", h.GetUser)
