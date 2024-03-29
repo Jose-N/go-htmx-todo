@@ -1,10 +1,11 @@
 package handler
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 
-	"github.com/Jose-N/go-htmx-todo/internal/templates"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 )
 
@@ -14,8 +15,18 @@ func (h *Handler) SaveTodo(c echo.Context) error {
 }
 
 func (h *Handler) GetTodos(c echo.Context) error {
-	content := templates.Main("jose", "123")
-	return templates.GenericLayout(content, "title").Render(c.Request().Context(), c.Response().Writer)
+	token, ok := c.Get("user").(*jwt.Token)
+	if !ok {
+		return errors.New("JWT token missing or invalid")
+	}
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		return errors.New("failed to cast claims")
+	}
+	return c.JSON(http.StatusOK, claims)
+
+	//content := templates.Main("jose", "123")
+	//return templates.GenericLayout(content, "title").Render(c.Request().Context(), c.Response().Writer)
 }
 
 func (h *Handler) GetTodo(c echo.Context) error {
