@@ -7,25 +7,29 @@ import (
 	"github.com/Jose-N/go-htmx-todo/internal/store/pgStore"
 	"github.com/Jose-N/go-htmx-todo/internal/templates"
 	"github.com/joho/godotenv"
+	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Failed to load .env file")
+		log.Fatal("failed to load .env file")
 	}
 
 	title := "Esojist | A Jank Todo App"
-
 	db := pgStore.ConnectDB()
 	h := &handler.Handler{
 		Db: db,
 	}
-
 	e := echo.New()
+	g := e.Group("/")
 
 	e.Static("/static", "internal/static")
+	g.Use(echojwt.WithConfig(echojwt.Config{
+		TokenLookup: "cookie:Esojist",
+		SigningKey:  []byte("secret"),
+	}))
 
 	// Index
 	e.GET("/", func(c echo.Context) error {
@@ -34,19 +38,19 @@ func main() {
 	})
 
 	//auth routes
-	e.GET("/signup", h.SignUp)
-	e.POST("/signup", h.SaveUser)
-	e.GET("/signin", h.SignIn)
-	e.POST("/signin", h.LogIn)
+	e.GET("/auth/login", h.GetLogin)
+	e.POST("/auth/login", h.PostLogIn)
+	e.GET("/auth/signup", h.GetSignUp)
+	e.POST("/auth/signup", h.PostSignUp)
 
 	//user routes
 	e.GET("/user/:id", h.GetUser)
 	e.PATCH("/user/:id", h.UpdateUser)
-	e.DELETE("user/:id", h.DeleteUser)
+	e.DELETE("/user/:id", h.DeleteUser)
 
 	//todo routes
-	e.POST("todo", h.SaveTodo)
-	e.GET("/todo", h.GetTodos)
+	g.POST("/todo", h.SaveTodo)
+	g.GET("todo", h.GetTodos)
 	e.GET("/todo/:id", h.GetTodo)
 	e.PATCH("/todo/:id", h.UpdateTodo)
 	e.DELETE("/todo/:id", h.DeleteTodo)
