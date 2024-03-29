@@ -53,7 +53,7 @@ func (h *Handler) PostLogIn(c echo.Context) error {
 func (h *Handler) GetSignUp(c echo.Context) error {
 	content := templates.Auth(false, "/auth/signup", "Sign In")
 	title := "Esojist | A Jank Todo App"
-	return templates.GenericLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
+	return util.RenderPage(c, templates.GenericLayout(content, title))
 }
 
 func (h *Handler) PostSignUp(c echo.Context) error {

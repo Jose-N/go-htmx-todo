@@ -31,24 +31,21 @@ func main() {
 		SigningKey:  []byte("secret"),
 	}))
 
-	// Index
+	// Open Routes
 	e.GET("/", func(c echo.Context) error {
 		content := templates.Index()
 		return templates.MainLayout(content, title).Render(c.Request().Context(), c.Response().Writer)
 	})
-
-	//auth routes
 	e.GET("/auth/login", h.GetLogin)
 	e.POST("/auth/login", h.PostLogIn)
 	e.GET("/auth/signup", h.GetSignUp)
 	e.POST("/auth/signup", h.PostSignUp)
 
-	//user routes
-	e.GET("/user/:id", h.GetUser)
-	e.PATCH("/user/:id", h.UpdateUser)
-	e.DELETE("/user/:id", h.DeleteUser)
+	// Restricted Routes
+	g.GET("user", h.GetUser)
+	g.PATCH("user", h.UpdateUser)
+	g.DELETE("user", h.DeleteUser)
 
-	//todo routes
 	g.POST("/todo", h.SaveTodo)
 	g.GET("todo", h.GetTodos)
 	e.GET("/todo/:id", h.GetTodo)
